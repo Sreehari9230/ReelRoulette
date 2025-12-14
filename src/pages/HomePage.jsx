@@ -1,11 +1,14 @@
-import React from 'react'
+import React from "react";
 
 const HomePage = () => {
   return (
-    <div className="bg-blue-500 text-white p-4 rounded-lg">
-      Tailwind is working!
-    </div>
-  )
-}
+    <div>
 
-export default HomePage
+      <button className="inline-block cursor-pointer rounded-md bg-gray-800 px-4 py-3 text-center text-sm font-semibold uppercase text-white transition duration-200 ease-in-out hover:bg-gray-900">
+        Button
+      </button>
+    </div>
+  );
+};
+
+export default HomePage;
