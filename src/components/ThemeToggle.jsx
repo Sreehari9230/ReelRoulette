@@ -1,12 +1,23 @@
 import React from "react";
-
 import { Sun, Moon } from "lucide-react";
 
+import { useThemeStore } from "../store/useThemeStore";
+
 const ThemeToggle = () => {
+  const themeToggled = () => {
+    console.log("theme changed");
+  };
+  const { theme, setTheme } = useThemeStore();
+
   return (
     <div>
       <label className="toggle text-base-content">
-        <input type="checkbox" value="synthwave" className="theme-controller" />
+        <input
+          type="checkbox"
+          value="synthwave"
+          className="theme-controller"
+          onClick={themeToggled}
+        />
 
         {/* Replaced SVG with Lucide Sun icon, setting size to 16 */}
         <Sun aria-label="sun" size={16} />

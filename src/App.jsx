@@ -7,7 +7,7 @@ import Navbar from "./components/Navbar";
 
 const App = () => {
   return (
-    <>
+    <div>
       <Navbar />
       
       <Routes>
@@ -15,7 +15,7 @@ const App = () => {
         <Route path="/home" element={<HomePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </>
+    </div>
   );
 };
 
