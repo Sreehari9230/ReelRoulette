@@ -1,10 +1,16 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
+
+import HomePage from "./pages/HomePage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const App = () => {
   return (
-    <div className="bg-blue-500 text-white p-4 rounded-lg">
-      Tailwind is working!
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/home" element={<HomePage />} />
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   );
 };
 
