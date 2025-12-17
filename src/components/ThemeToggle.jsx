@@ -4,10 +4,12 @@ import { Sun, Moon } from "lucide-react";
 import { useThemeStore } from "../store/useThemeStore";
 
 const ThemeToggle = () => {
+  const { theme, setTheme } = useThemeStore();
+
   const themeToggled = () => {
     console.log("theme changed");
+    setTheme("light");
   };
-  const { theme, setTheme } = useThemeStore();
 
   return (
     <div>

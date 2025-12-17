@@ -8,14 +8,14 @@ export default {
   daisyui: {
     themes: [
       {
-        mylight: {
+        light: {
           "primary": "#2563eb",
           "secondary": "#22c55e",
           "accent": "#f59e0b",
           "base-100": "#ffffff",
           "base-content": "#111827",
         },
-        mydark: {
+        dark: {
           "primary": "#60a5fa",
           "secondary": "#4ade80",
           "accent": "#fbbf24",

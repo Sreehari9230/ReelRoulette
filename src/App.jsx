@@ -5,11 +5,16 @@ import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import Navbar from "./components/Navbar";
 
+import { useThemeStore } from "./store/useThemeStore";
+
 const App = () => {
+  const { theme } = useThemeStore();
+
   return (
-    <div>
+    <div data-theme={theme}>
+      {/* data-theme={theme} */}
       <Navbar />
-      
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
