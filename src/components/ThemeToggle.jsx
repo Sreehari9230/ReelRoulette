@@ -1,14 +1,14 @@
 import React from "react";
 import { Sun, Moon } from "lucide-react";
-
 import { useThemeStore } from "../store/useThemeStore";
 
 const ThemeToggle = () => {
   const { theme, setTheme } = useThemeStore();
 
   const themeToggled = () => {
-    console.log("theme changed");
-    setTheme("light");
+    // Toggle between light and dark
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
   };
 
   return (
@@ -18,13 +18,12 @@ const ThemeToggle = () => {
           type="checkbox"
           value="synthwave"
           className="theme-controller"
-          onClick={themeToggled}
+          onChange={themeToggled}      // ✅ changed from onClick
+          checked={theme === "dark"}    // ✅ controlled input
         />
 
-        {/* Replaced SVG with Lucide Sun icon, setting size to 16 */}
+        {/* Icons */}
         <Sun aria-label="sun" size={16} />
-
-        {/* Replaced SVG with Lucide Moon icon, setting size to 16 */}
         <Moon aria-label="moon" size={16} />
       </label>
     </div>
