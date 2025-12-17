@@ -12,7 +12,6 @@ const App = () => {
 
   return (
     <div data-theme={theme}>
-      {/* data-theme={theme} */}
       <Navbar />
 
       <Routes>
