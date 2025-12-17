@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import analyticsRoutes from "./routes/analytics.js";
+import analyticsRoutes from "./routes/analytics.route.js";
 
 dotenv.config();
 
@@ -13,10 +13,10 @@ app.use("/api/analytics", analyticsRoutes);
 
 // Test route
 app.get("/", (req, res) => {
-  res.send("Backend is running");
+  res.send("Backend running with controllers!");
 });
 
-// MongoDB connection
+// Connect MongoDB
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
