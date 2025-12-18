@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useMovieStore } from "../store/useMovieStore";
 
-const SearchFilters = ({ onSearch }) => {
+const SearchFilters = () => {
+  const { fetchMovies } = useMovieStore();
+
   const [filters, setFilters] = useState({
     genre: "any",
     yearFrom: 1990,
@@ -16,7 +19,7 @@ const SearchFilters = ({ onSearch }) => {
 
   const handleSearch = () => {
     console.log("Selected filters:", filters);
-    onSearch?.(filters); // send to parent / backend
+    fetchMovies(filters);
   };
 
   return (

@@ -9,11 +9,25 @@ export const useMovieStore = create((set) => ({
     filters: {},
 
     // actions
-    fetchMovies: async (filters = {}) => {
+    fetchMovies: async (filters) => {
         try {
+            console.log("Selected filters: from store", filters);
+
             set({ isMoviesLoading: true, filters });
 
-            const res = await axiosInstance.post("/movies/filter", filters);
+            // const res = await axiosInstance.post("/movies/filter", filters);
+            const res = await axiosInstance.post("/api/analytics/", {
+                "event": "from_frontend2",
+                "value": "home"
+            });
+
+            // http://localhost:5000/api/analytics
+            // ✅ show backend response message
+            if (res?.data?.message) {
+                toast.success(res.data.message);
+                console.log(res.data, "data");
+                console.log(res.data.message, "message");
+            }
 
             set({ movies: res.data });
         } catch (error) {
