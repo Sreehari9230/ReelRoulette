@@ -2,9 +2,7 @@ import React from "react";
 import SearchFilters from "../components/SearchFilters";
 
 const HomePage = () => {
-  const ButtonClicked = () => {
-    console.log("Clicked the button in the homePage");
-  };
+
   return (
     // <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-base-100 text-base-content">
     //   <SearchFilters />
