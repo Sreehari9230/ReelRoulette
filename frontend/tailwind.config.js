@@ -6,24 +6,24 @@ export default {
   ],
   plugins: [require("daisyui")],
   daisyui: {
-    //theme has problem still showing the default daisyui theme for dark and light
     themes: [
       {
-        light: {
-          "primary": "#2563eb",
-          "secondary": "#22c55e",  
-          "accent": "#f59e0b",
+        mytheme: {
+          "primary": "#2563eb",      // blue-600
+          "secondary": "#22c55e",    // green-500
+          "accent": "#f59e0b",       // amber-500
+          "neutral": "#1f2937",      // gray-800
+
           "base-100": "#ffffff",
-          "base-content": "#111827",
-        },
-        dark: {
-          "primary": "#60a5fa",
-          "secondary": "#4ade80",
-          "accent": "#fbbf24",
-          "base-100": "#0f172a",
-          "base-content": "#e5e7eb",
+          "base-200": "#f3f4f6",
+          "base-300": "#e5e7eb",
+
+          "info": "#0ea5e9",
+          "success": "#22c55e",
+          "warning": "#f59e0b",
+          "error": "#ef4444",
         },
       },
     ],
   },
-}
+};
