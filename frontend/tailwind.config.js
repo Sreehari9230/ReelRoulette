@@ -6,11 +6,12 @@ export default {
   ],
   plugins: [require("daisyui")],
   daisyui: {
+    //theme has problem still showing the default daisyui theme for dark and light
     themes: [
       {
         light: {
           "primary": "#2563eb",
-          "secondary": "#22c55e",
+          "secondary": "#22c55e",  
           "accent": "#f59e0b",
           "base-100": "#ffffff",
           "base-content": "#111827",
