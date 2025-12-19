@@ -10,11 +10,13 @@ import moviesRoutes from "./routes/movies.route.js";
 
 const app = express();
 
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
-app.use(cors({
-  origin: "http://localhost:5173",
-  credentials: true,
-}));
 app.use(express.json());
 
 // Routes
@@ -29,9 +31,10 @@ app.get("/", (req, res) => {
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
-  .catch(err => console.error(err));
+  .catch((err) => console.error(err));
 
 const PORT = process.env.PORT || 4000;
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

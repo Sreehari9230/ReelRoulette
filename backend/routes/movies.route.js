@@ -1,5 +1,9 @@
 import express from "express";
-import { getRandomMovies, getGenres, getLanguages } from "../controllers/movies.controller.js";
+import {
+    getRandomMovies,
+    getGenres,
+    getLanguages,
+} from "../controllers/movies.controller.js";
 
 const router = express.Router();
 
@@ -13,4 +17,3 @@ router.get("/genres", getGenres);
 router.get("/languages", getLanguages);
 
 export default router;
-

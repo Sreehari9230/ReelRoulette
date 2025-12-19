@@ -1,12 +1,19 @@
-import { fetchMoviesFromTMDB, fetchGenres, fetchLanguages } from "../services/tmdb.service.js";
-
+import {
+  fetchMoviesFromTMDB,
+  fetchGenres,
+  fetchLanguages,
+} from "../services/tmdb.service.js";
 
 export const getRandomMovies = async (req, res) => {
   try {
     const movies = await fetchMoviesFromTMDB(req.body);
-    console.log('line 6 in controller')  // not executed
+
+    console.log("line 6 in controller"); // not executed
+
     if (!movies || movies.length === 0) {
-      return res.status(404).json({ message: "No movies found from controller" });
+      return res
+        .status(404)
+        .json({ message: "No movies found from controller" });
     }
 
     // Shuffle movies
@@ -21,10 +28,11 @@ export const getRandomMovies = async (req, res) => {
     });
   } catch (error) {
     console.error("TMDB Error:", error.message);
-    res.status(500).json({ message: "Failed to fetch movies from controller" });
+    res
+      .status(500)
+      .json({ message: "Failed to fetch movies from controller" });
   }
 };
-
 
 let genresCache = null;
 let languagesCache = null;
@@ -34,6 +42,7 @@ export const getGenres = async (req, res) => {
     if (!genresCache) {
       genresCache = await fetchGenres();
     }
+
     res.status(200).json(genresCache);
   } catch (error) {
     console.error("Error fetching genres:", error.message);
@@ -46,9 +55,11 @@ export const getLanguages = async (req, res) => {
     if (!languagesCache) {
       languagesCache = await fetchLanguages();
     }
+
     res.status(200).json(languagesCache);
   } catch (error) {
     console.error("Error fetching languages:", error.message);
     res.status(500).json({ message: "Failed to fetch languages" });
   }
 };
+F
