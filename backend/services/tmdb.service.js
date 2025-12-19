@@ -26,7 +26,7 @@ export const fetchMoviesFromTMDB = async (filters) => {
     if (genre !== "any") params.with_genres = genre;
     if (language !== "any") params.with_original_language = language;
 
-    console.log("from services line 29","params",params  ,"---", TMDB_HEADERS, "------",  TMDB_BASE_URL);
+    console.log("from services line 29", "params", params, "---", TMDB_HEADERS, "------", TMDB_BASE_URL);
 
     // 1️⃣ First request → get total pages
     const firstRes = await axios.get(
@@ -50,4 +50,22 @@ export const fetchMoviesFromTMDB = async (filters) => {
     );
 
     return randomRes.data.results;
+};
+
+
+// Fetch movie genres from TMDB
+export const fetchGenres = async () => {
+    const response = await axios.get(`${TMDB_BASE_URL}/genre/movie/list`, {
+        headers: TMDB_HEADERS,
+        params: { language: "en-US" },
+    });
+    return response.data.genres; // array of {id, name}
+};
+
+// Fetch languages from TMDB
+export const fetchLanguages = async () => {
+    const response = await axios.get(`${TMDB_BASE_URL}/configuration/languages`, {
+        headers: TMDB_HEADERS,
+    });
+    return response.data; // array of {iso_639_1, english_name, name}
 };
