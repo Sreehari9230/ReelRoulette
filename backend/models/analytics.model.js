@@ -1,15 +1,33 @@
 import mongoose from "mongoose";
 
-const analyticsSchema = new mongoose.Schema({
-  event: {
-    type: String,
-    required: true
+const analyticsSchema = new mongoose.Schema(
+  {
+    ip: {
+      type: String,
+      required: true,
+      unique: true, // ✅ prevents duplicate users
+    },
+
+    userAgent: {
+      type: String, // optional: browser/device info
+    },
+
+    firstVisit: {
+      type: Date,
+      default: Date.now,
+    },
+
+    lastVisit: {
+      type: Date,
+      default: Date.now,
+    },
+
+    visitCount: {
+      type: Number,
+      default: 1,
+    },
   },
-  value: String,
-  createdAt: {
-    type: Date,
-    default: Date.now
-  }
-});
+  { timestamps: true }
+);
 
 export default mongoose.model("Analytics", analyticsSchema);

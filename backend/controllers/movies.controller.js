@@ -1,24 +1,28 @@
-import Analytics from "../models/analytics.model.js";
+import { fetchMoviesFromTMDB } from "../services/tmdb.service.js";
 
-// Save analytics
-export const saveAnalytics = async (req, res) => {
+export const getRandomMovies = async (req, res) => {
   try {
-    const analytics = new Analytics(req.body);
-    await analytics.save();
-    res.status(201).json({ message: "Analytics saved" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Failed to save analytics" });
-  }
-};
+    const filters = req.body;
 
-// Get all analytics
-export const getAnalytics = async (req, res) => {
-  try {
-    const data = await Analytics.find().sort({ createdAt: -1 });
-    res.json(data);
+    const data = await fetchMoviesFromTMDB(filters);
+
+    if (!data.results || data.results.length === 0) {
+      return res.status(404).json({
+        message: "No movies found",
+      });
+    }
+
+    return res.status(200).json({
+      page: data.page,
+      totalPages: data.total_pages,
+      totalResults: data.total_results,
+      movies: data.results,
+    });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Failed to fetch analytics" });
+    console.error("TMDB Error:", error.response?.data || error.message);
+
+    res.status(500).json({
+      message: "Failed to fetch movies",
+    });
   }
 };

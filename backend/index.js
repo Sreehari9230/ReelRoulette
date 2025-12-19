@@ -2,11 +2,13 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
-import analyticsRoutes from "./routes/movies.route.js";
+import moviesRoutes from "./routes/movies.route.js";
 
 dotenv.config();
 
 const app = express();
+
+
 app.use(cors({
   origin: "http://localhost:5173",
   credentials: true,
@@ -14,7 +16,7 @@ app.use(cors({
 app.use(express.json());
 
 // Routes
-app.use("/api/analytics", analyticsRoutes);
+app.use("/api/movie", moviesRoutes);
 
 // Test route
 app.get("/", (req, res) => {
