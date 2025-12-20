@@ -1,5 +1,6 @@
 import {
   fetchMoviesFromTMDB,
+  fetchMovieById,
   fetchGenres,
   fetchLanguages,
 } from "../services/tmdb.service.js";
@@ -33,6 +34,32 @@ export const getRandomMovies = async (req, res) => {
       .json({ message: "Failed to fetch movies from controller" });
   }
 };
+
+export const getMovieById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({
+        message: "Movie ID is required",
+      });
+    }
+
+    const movie = await fetchMovieById(id);
+
+    res.status(200).json(movie);
+  } catch (error) {
+    console.error(
+      "TMDB Movie Error:",
+      error.response?.data || error.message
+    );
+
+    res.status(error.response?.status || 500).json({
+      message: "Failed to fetch movie details",
+    });
+  }
+};
+
 
 let genresCache = null;
 let languagesCache = null;

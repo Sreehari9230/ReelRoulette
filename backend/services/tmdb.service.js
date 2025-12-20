@@ -64,6 +64,20 @@ export const fetchMoviesFromTMDB = async (filters) => {
     return randomRes.data.results;
 };
 
+export const fetchMovieById = async (movieId) => {
+    const response = await axios.get(
+        `${TMDB_BASE_URL}/movie/${movieId}`,
+        {
+            headers: TMDB_HEADERS,
+            params: {
+                language: "en-US",
+            },
+        }
+    );
+
+    return response.data;
+};
+
 // Fetch movie genres from TMDB
 export const fetchGenres = async () => {
     const response = await axios.get(
