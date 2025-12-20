@@ -13,12 +13,13 @@ const App = () => {
   return (
     <div data-theme={theme}>
       <Navbar />
-
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <div className="pt-16">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </div>
     </div>
   );
 };

@@ -1,10 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Clapperboard, Dices } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
+  const [show, setShow] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 60) {
+        setShow(false); // scrolling down
+      } else {
+        setShow(true); // scrolling up
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
   return (
-    <nav className="w-full border-b border-base-300 bg-base-100">
+    <nav
+      className={`w-full border-b border-base-300 bg-base-100
+      fixed top-0 z-50 transition-transform duration-300
+      ${show ? "translate-y-0" : "-translate-y-full"}`}
+    >
       <div className="relative mx-auto max-w-7xl px-4 py-3 flex items-center justify-end">
         {/* Center: Logo + Name */}
         <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
