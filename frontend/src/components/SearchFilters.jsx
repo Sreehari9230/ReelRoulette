@@ -73,8 +73,8 @@ const SearchFilters = () => {
   const languageLabel =
     filters.language === "any"
       ? "Any Language"
-      : languages.find((l) => l.iso_639_1 === filters.language)
-          ?.english_name || "Any Language";
+      : languages.find((l) => l.iso_639_1 === filters.language)?.english_name ||
+        "Any Language";
 
   /* ================= MEMOIZED VALUES ================= */
   const filteredLanguages = useMemo(() => {
@@ -82,9 +82,7 @@ const SearchFilters = () => {
       (l) =>
         l.iso_639_1 &&
         l.english_name &&
-        l.english_name
-          .toLowerCase()
-          .includes(languageSearch.toLowerCase())
+        l.english_name.toLowerCase().includes(languageSearch.toLowerCase())
     );
   }, [languages, languageSearch]);
 

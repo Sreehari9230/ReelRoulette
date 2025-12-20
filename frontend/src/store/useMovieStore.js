@@ -11,7 +11,12 @@ export const useMovieStore = create((set) => ({
     // Random Movie States
     isMoviesLoading: false,
     movies: [],
-    filters: {},
+    filters: null,
+
+    // Movie Data State
+    isMovieDetailsLoading: false,
+    movieDetails: null,
+
 
     fetchGenres: async () => {
         try {
@@ -59,7 +64,7 @@ export const useMovieStore = create((set) => ({
         }
     },
 
-    // actions
+    // fetching movies according to filters
     fetchMovies: async (filters) => {
         try {
             console.log("Selected filters: from store", filters);
@@ -86,6 +91,34 @@ export const useMovieStore = create((set) => ({
             toast.error("Failed to fetch movies");
         } finally {
             set({ isMoviesLoading: false });
+        }
+    },
+
+    // router.get("/:id", getMovieById);
+
+    // fetching the data of one single movie according to id
+    fetchMovieData: async (id) => {
+        try {
+            console.log("Movie ID:", id);
+
+            set({ isMovieDetailsLoading: true });
+
+            // const res = await axiosInstance.post("/movies/filter", filters);
+            const res = await axiosInstance.get(`/api/movies/${id}`);
+
+            // ✅ show backend response message
+            if (res?.data?.message) {
+                toast.success(res.data.message);
+                console.log(res.data, "data");
+                console.log(res.data.message, "message");
+            }
+
+            set({ movieDetails: res.data });
+        } catch (error) {
+            console.error("Error fetching movie details:", error);
+            toast.error("Failed to fetch movie details");
+        } finally {
+            set({ isMovieDetailsLoading: false });
         }
     },
 

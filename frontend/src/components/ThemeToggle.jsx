@@ -18,8 +18,8 @@ const ThemeToggle = () => {
           type="checkbox"
           value="synthwave"
           className="theme-controller"
-          onChange={themeToggled}      // ✅ changed from onClick
-          checked={theme === "dark"}    // ✅ controlled input
+          onChange={themeToggled} // ✅ changed from onClick
+          checked={theme === "dark"} // ✅ controlled input
         />
 
         {/* Icons */}
