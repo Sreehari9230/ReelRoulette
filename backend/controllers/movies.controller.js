@@ -9,7 +9,7 @@ export const getRandomMovies = async (req, res) => {
   try {
     const movies = await fetchMoviesFromTMDB(req.body);
 
-    console.log("line 6 in controller"); // not executed
+    // console.log("line 6 in controller"); // not executed
 
     if (!movies || movies.length === 0) {
       return res

@@ -26,15 +26,15 @@ export const fetchMoviesFromTMDB = async (filters) => {
     if (genre !== "any") params.with_genres = genre;
     if (language !== "any") params.with_original_language = language;
 
-    console.log(
-        "from services line 29",
-        "params",
-        params,
-        "---",
-        TMDB_HEADERS,
-        "------",
-        TMDB_BASE_URL
-    );
+    // console.log(
+    //     "from services line 29",
+    //     "params",
+    //     params,
+    //     "---",
+    //     TMDB_HEADERS,
+    //     "------",
+    //     TMDB_BASE_URL
+    // );
 
     // 1️⃣ First request → get total pages
     const firstRes = await axios.get(
@@ -45,7 +45,7 @@ export const fetchMoviesFromTMDB = async (filters) => {
         }
     );
 
-    console.log("from services line 36");
+    // console.log("from services line 36");
 
     const totalPages = Math.min(firstRes.data.total_pages, 500); // TMDB limit
 
