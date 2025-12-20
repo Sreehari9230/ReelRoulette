@@ -66,6 +66,8 @@ let languagesCache = null;
 
 export const getGenres = async (req, res) => {
   try {
+    console.log('genres');
+    
     if (!genresCache) {
       genresCache = await fetchGenres();
     }
@@ -79,6 +81,7 @@ export const getGenres = async (req, res) => {
 
 export const getLanguages = async (req, res) => {
   try {
+    console.log('languages');
     if (!languagesCache) {
       languagesCache = await fetchLanguages();
     }

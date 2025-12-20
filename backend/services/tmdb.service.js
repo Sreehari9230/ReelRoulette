@@ -65,6 +65,7 @@ export const fetchMoviesFromTMDB = async (filters) => {
 };
 
 export const fetchMovieById = async (movieId) => {
+    console.log('in fetchmoviebyid');
     const response = await axios.get(
         `${TMDB_BASE_URL}/movie/${movieId}`,
         {
@@ -93,6 +94,8 @@ export const fetchGenres = async () => {
 
 // Fetch languages from TMDB
 export const fetchLanguages = async () => {
+    console.log('in fetchlanguages');
+    
     const response = await axios.get(
         `${TMDB_BASE_URL}/configuration/languages`,
         {
