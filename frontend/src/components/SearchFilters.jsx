@@ -1,132 +1,178 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useMovieStore } from "../store/useMovieStore";
 
-const GENRES = [
-  { id: "28", name: "Action" },
-  { id: "35", name: "Comedy" },
-  { id: "18", name: "Drama" },
-  { id: "27", name: "Horror" },
-  { id: "10749", name: "Romance" },
-  { id: "878", name: "Sci-Fi" },
-];
+const MAX_GENRES = 3;
+
+const DEFAULT_FILTERS = {
+  genres: [],
+  yearFrom: 1990,
+  yearTo: 2025,
+  rating: 6,
+  language: "any",
+};
 
 const SearchFilters = () => {
-  const { fetchMovies } = useMovieStore();
+  const {
+    fetchGenres,
+    fetchLanguages,
+    fetchMovies,
+    genres,
+    languages,
+    isLanGenLoading,
+  } = useMovieStore();
 
-  const [filters, setFilters] = useState({
-    genres: [],
-    yearFrom: 1990,
-    yearTo: 2025,
-    rating: 6,
-    language: "any",
-  });
+  const [filters, setFilters] = useState(DEFAULT_FILTERS);
+  const [languageSearch, setLanguageSearch] = useState("");
 
-  const handleGenreAdd = (genreId) => {
-    if (filters.genres.includes(genreId)) return;
+  /* ================= FETCH DATA ================= */
+  useEffect(() => {
+    fetchGenres();
+    fetchLanguages();
+  }, [fetchGenres, fetchLanguages]);
 
-    setFilters({
-      ...filters,
-      genres: [...filters.genres, genreId],
-    });
+  /* ================= UTILS ================= */
+  const closeDropdown = () => {
+    document.activeElement?.blur();
   };
 
-  const handleGenreRemove = (genreId) => {
-    setFilters({
-      ...filters,
-      genres: filters.genres.filter((g) => g !== genreId),
-    });
+  /* ================= GENRES ================= */
+  const addGenre = (id) => {
+    if (filters.genres.length >= MAX_GENRES) return;
+    if (!filters.genres.includes(id)) {
+      setFilters((prev) => ({
+        ...prev,
+        genres: [...prev.genres, id],
+      }));
+    }
+    closeDropdown();
   };
 
+  const removeGenre = (id) => {
+    setFilters((prev) => ({
+      ...prev,
+      genres: prev.genres.filter((g) => g !== id),
+    }));
+  };
+
+  /* ================= COMMON ================= */
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFilters({ ...filters, [name]: value });
+    setFilters((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSearch = () => {
-    console.log("Selected filters:", filters);
     fetchMovies(filters);
   };
 
-  return (
-    <div className="card bg-base-200 shadow-xl w-full max-w-md">
-      <div className="card-body gap-4">
-        <h2 className="card-title text-xl">🎲 Random Movie Picker</h2>
+  /* ================= LABEL HELPERS ================= */
+  const genreLabel =
+    filters.genres.length === 0
+      ? "Any Genre"
+      : `${filters.genres.length} selected`;
 
-        {/* Genres */}
+  const languageLabel =
+    filters.language === "any"
+      ? "Any Language"
+      : languages.find((l) => l.iso_639_1 === filters.language)
+          ?.english_name || "Any Language";
+
+  /* ================= MEMOIZED VALUES ================= */
+  const filteredLanguages = useMemo(() => {
+    return languages.filter(
+      (l) =>
+        l.iso_639_1 &&
+        l.english_name &&
+        l.english_name
+          .toLowerCase()
+          .includes(languageSearch.toLowerCase())
+    );
+  }, [languages, languageSearch]);
+
+  return (
+    <div className="card bg-base-200 shadow-md w-full max-w-sm">
+      <div className="card-body p-4 gap-3">
+        <h2 className="card-title text-lg">🎲 Random Movie Picker</h2>
+
+        {/* ================= GENRES ================= */}
         <div>
-          <label className="label">
-            <span className="label-text">Genres</span>
+          <label className="label py-1">
+            <span className="label-text text-sm">
+              Genres (max {MAX_GENRES})
+            </span>
           </label>
 
-          {/* Selected genres (chips) */}
-          <div className="flex flex-wrap gap-2 mb-2">
-            {filters.genres.map((genreId) => {
-              const genre = GENRES.find((g) => g.id === genreId);
-              return (
-                <span key={genreId} className="badge badge-primary gap-2">
-                  {genre?.name}
-                  <button
-                    className="ml-1"
-                    onClick={() => handleGenreRemove(genreId)}
-                  >
-                    ✕
-                  </button>
-                </span>
-              );
-            })}
-          </div>
+          {filters.genres.length > 0 && (
+            <div className="flex flex-wrap gap-2 mb-2">
+              {filters.genres.map((id) => {
+                const genre = genres.find((g) => g.id === id);
+                return (
+                  <span key={id} className="badge badge-primary gap-1">
+                    {genre?.name}
+                    <button onClick={() => removeGenre(id)}>✕</button>
+                  </span>
+                );
+              })}
+            </div>
+          )}
 
-          {/* Dropdown */}
-          <select
-            className="select select-bordered w-full"
-            onChange={(e) => handleGenreAdd(e.target.value)}
-            value=""
-          >
-            <option value="" disabled>
-              Select a genre
-            </option>
-            {GENRES.map((genre) => (
-              <option
-                key={genre.id}
-                value={genre.id}
-                disabled={filters.genres.includes(genre.id)}
-              >
-                {genre.name}
-              </option>
-            ))}
-          </select>
+          <div className="dropdown w-full">
+            <button tabIndex={0} className="btn btn-outline btn-sm w-full">
+              {genreLabel}
+            </button>
+
+            <div
+              tabIndex={0}
+              className="dropdown-content z-1 p-2 shadow bg-base-100 rounded-box w-full max-h-52 overflow-y-auto"
+            >
+              {genres.map((genre) => (
+                <button
+                  key={genre.id}
+                  className="btn btn-ghost btn-sm w-full justify-start"
+                  disabled={
+                    filters.genres.includes(genre.id) ||
+                    filters.genres.length >= MAX_GENRES
+                  }
+                  onClick={() => addGenre(genre.id)}
+                >
+                  {genre.name}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
-        {/* Release Year */}
+        {/* ================= YEAR RANGE ================= */}
         <div>
-          <label className="label">
-            <span className="label-text">Release Year</span>
+          <label className="label py-1">
+            <span className="label-text text-sm">Release Year</span>
           </label>
+
           <div className="flex gap-2">
             <input
               type="number"
               name="yearFrom"
-              className="input input-bordered w-full"
+              className="input input-bordered input-sm w-full"
               value={filters.yearFrom}
               onChange={handleChange}
             />
             <input
               type="number"
               name="yearTo"
-              className="input input-bordered w-full"
+              className="input input-bordered input-sm w-full"
               value={filters.yearTo}
               onChange={handleChange}
             />
           </div>
         </div>
 
-        {/* Rating */}
+        {/* ================= RATING ================= */}
         <div>
-          <label className="label">
-            <span className="label-text">
+          <label className="label py-1">
+            <span className="label-text text-sm">
               Minimum Rating: {filters.rating}+
             </span>
           </label>
+
           <input
             type="range"
             min="0"
@@ -135,38 +181,78 @@ const SearchFilters = () => {
             name="rating"
             value={filters.rating}
             onChange={handleChange}
-            className="range range-primary"
+            className="range range-primary range-sm"
           />
         </div>
 
-        {/* Language (single select stays same) */}
+        {/* ================= LANGUAGE ================= */}
         <div>
-          <label className="label">
-            <span className="label-text">Language</span>
+          <label className="label py-1">
+            <span className="label-text text-sm">Language</span>
           </label>
-          <select
-            className="select select-bordered w-full"
-            name="language"
-            value={filters.language}
-            onChange={handleChange}
-          >
-            <option value="any">Any</option>
-            <option value="en">English</option>
-            <option value="hi">Hindi</option>
-            <option value="ko">Korean</option>
-            <option value="ja">Japanese</option>
-          </select>
+
+          <div className="dropdown w-full">
+            <button tabIndex={0} className="btn btn-outline btn-sm w-full">
+              {languageLabel}
+            </button>
+
+            <div
+              tabIndex={0}
+              className="dropdown-content z-1 p-2 shadow bg-base-100 rounded-box w-full max-h-60 overflow-y-auto"
+            >
+              <input
+                type="text"
+                placeholder="Search language..."
+                className="input input-bordered input-sm w-full mb-2"
+                value={languageSearch}
+                onChange={(e) => setLanguageSearch(e.target.value)}
+              />
+
+              <button
+                className="btn btn-ghost btn-sm w-full justify-start"
+                onClick={() => {
+                  setFilters((prev) => ({ ...prev, language: "any" }));
+                  setLanguageSearch("");
+                  closeDropdown();
+                }}
+              >
+                Any
+              </button>
+
+              {filteredLanguages.map((lang) => (
+                <button
+                  key={lang.iso_639_1}
+                  className="btn btn-ghost btn-sm w-full justify-start"
+                  onClick={() => {
+                    setFilters((prev) => ({
+                      ...prev,
+                      language: lang.iso_639_1,
+                    }));
+                    setLanguageSearch("");
+                    closeDropdown();
+                  }}
+                >
+                  {lang.english_name}
+                </button>
+              ))}
+
+              {filteredLanguages.length === 0 && (
+                <p className="text-sm text-center opacity-60 mt-2">
+                  No languages found
+                </p>
+              )}
+            </div>
+          </div>
         </div>
 
-        {/* Search */}
-        <div className="card-actions mt-4">
-          <button
-            className="btn btn-primary w-full text-lg"
-            onClick={handleSearch}
-          >
-            Pick a Random Movie 🎥
-          </button>
-        </div>
+        {/* ================= SEARCH ================= */}
+        <button
+          className="btn btn-primary btn-sm w-full mt-2"
+          onClick={handleSearch}
+          disabled={isLanGenLoading}
+        >
+          Pick a Random Movie 🎥
+        </button>
       </div>
     </div>
   );

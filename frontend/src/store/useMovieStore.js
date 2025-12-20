@@ -3,10 +3,61 @@ import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 
 export const useMovieStore = create((set) => ({
-    // state
+    // Filter States
+    genres: [],
+    languages: [],
+    isLanGenLoading: false,
+
+    // Random Movie States
     isMoviesLoading: false,
     movies: [],
     filters: {},
+
+    fetchGenres: async () => {
+        try {
+            set({ isLanGenLoading: true });
+            // /api/movies/languages
+            const res = await axiosInstance.get("/api/movies/genres");
+
+            // ✅ show backend response message
+            if (res?.data?.message) {
+                toast.success(res.data.message);
+                console.log(res.data, "data");
+                console.log(res.data.message, "message");
+            }
+
+            set({ genres: res.data });
+
+        } catch (error) {
+            console.error("Error fetching Genres:", error);
+            toast.error("Failed to fetch Genres");
+        } finally {
+            set({ isLanGenLoading: false });
+        }
+    },
+
+    fetchLanguages: async () => {
+        try {
+            set({ isLanGenLoading: true });
+            // /api/movies/languages
+            const res = await axiosInstance.get("/api/movies/languages");
+
+            // ✅ show backend response message
+            if (res?.data?.message) {
+                toast.success(res.data.message);
+                console.log(res.data, "data");
+                console.log(res.data.message, "message");
+            }
+
+            set({ languages: res.data });
+
+        } catch (error) {
+            console.error("Error fetching Languages:", error);
+            toast.error("Failed to fetch Languages");
+        } finally {
+            set({ isLanGenLoading: false });
+        }
+    },
 
     // actions
     fetchMovies: async (filters) => {
