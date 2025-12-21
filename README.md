@@ -1,4 +1,4 @@
-# Movie Picker
+<!-- # Movie Picker
 
 A simple, elegant movie discovery app that helps you pick a random movie when you can't decide what to watch.
 
@@ -43,4 +43,6 @@ Built by **Sreehari M**
 
 ---
 
-Star this repo if you find it useful!
+Star this repo if you find it useful! -->
+
+Not Be Updated
