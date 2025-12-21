@@ -17,6 +17,7 @@ Backend: Node.js, Express, TMDB API (server-side proxy)
 Setup:
 Backend-
 npm install
+
 npm run dev
 
 .env:
@@ -24,6 +25,7 @@ TMDB_API_KEY=your_tmdb_api_key
 
 Frontend
 npm install
+
 npm run dev
 
 Credits
