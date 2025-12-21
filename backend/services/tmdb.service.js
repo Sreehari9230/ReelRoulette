@@ -10,17 +10,26 @@ export const fetchMoviesFromTMDB = async (filters) => {
         yearTo,
     } = filters;
 
-    const params = {
-        include_adult: false,
-        sort_by: "popularity.desc",
-        "vote_average.gte": rating || 0,
-        "primary_release_date.gte": yearFrom
-            ? `${yearFrom}-01-01`
-            : undefined,
-        "primary_release_date.lte": yearTo
-            ? `${yearTo}-12-31`
-            : undefined,
-    };
+const params = {
+  include_adult: false,
+  sort_by: "popularity.desc",
+
+  // Rating quality
+  "vote_average.gte": rating || 6,
+  "vote_count.gte": 50,
+
+  // Avoid very obscure movies
+  "popularity.gte": 5,
+
+  // Release year range
+  "primary_release_date.gte": yearFrom
+    ? `${yearFrom}-01-01`
+    : undefined,
+
+  "primary_release_date.lte": yearTo
+    ? `${yearTo}-12-31`
+    : undefined,
+};
 
     // Handle "any"
     if (genre !== "any") params.with_genres = genre;

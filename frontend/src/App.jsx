@@ -6,6 +6,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import Navbar from "./components/Navbar";
 
 import { useThemeStore } from "./store/useThemeStore";
+import Footer from "./components/Footer";
 
 const App = () => {
   const { theme } = useThemeStore();
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
+      <Footer />
     </div>
   );
 };
