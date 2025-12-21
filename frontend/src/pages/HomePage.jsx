@@ -6,7 +6,7 @@ import DiceLoader from "../components/DiceLoader";
 import { useMovieStore } from "../store/useMovieStore";
 
 const HomePage = () => {
-  const { isLanGenLoading } = useMovieStore();
+  const { isLanGenLoading, isMoviesLoading } = useMovieStore();
   const [isLoading, setIsLoading] = useState(true);
 
   // Example: simulate API loading  Show an Info Instead of lan and gen loading here
@@ -22,7 +22,7 @@ const HomePage = () => {
                     flex flex-col items-center
                     px-4 py-6 gap-8"
     >
-      {isLanGenLoading || (isLoading && <DiceLoader />)}
+      {(isLanGenLoading || isMoviesLoading || isLoading) && <DiceLoader />}
 
       {/* Filters */}
       <SearchFilters />

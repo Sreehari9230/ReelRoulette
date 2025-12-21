@@ -9,7 +9,7 @@ export const getRandomMovies = async (req, res) => {
   try {
     const movies = await fetchMoviesFromTMDB(req.body);
 
-    // console.log("line 6 in controller"); // not executed
+    console.log("line 6 in controller", movies); // not executed
 
     if (!movies || movies.length === 0) {
       return res
@@ -21,7 +21,7 @@ export const getRandomMovies = async (req, res) => {
     const shuffled = movies.sort(() => 0.5 - Math.random());
 
     // Pick only 5 movies
-    const selectedMovies = shuffled.slice(0, 5);
+    const selectedMovies = shuffled.slice(0, 12);
 
     res.status(200).json({
       count: selectedMovies.length,
