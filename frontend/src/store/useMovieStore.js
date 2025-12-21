@@ -18,6 +18,12 @@ export const useMovieStore = create((set) => ({
     movieDetails: null,
 
 
+    // store/useMovieStore.js
+    pickedMovie: null,
+    setPickedMovie: (movie) => set({ pickedMovie: movie }),
+
+
+
     fetchGenres: async () => {
         try {
             set({ isLanGenLoading: true });

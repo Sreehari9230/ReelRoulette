@@ -28,7 +28,10 @@ const MovieList = () => {
         {movies.movies.map((movie) => (
           <div key={movie.id} className="group relative cursor-pointer">
             {/* Card container with hover effects */}
-            <div className="relative overflow-hidden rounded-lg transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl">
+            <div
+              className="relative overflow-hidden rounded-lg transition-all duration-300 ease-out hover:scale-105 hover:shadow-2xl"
+              id={`movie-${movie.id}`}
+            >
               {/* Poster wrapper (2:3 aspect ratio) */}
               <figure className="aspect-2/3 w-full relative">
                 {movie.poster_path ? (

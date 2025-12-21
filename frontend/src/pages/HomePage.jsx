@@ -5,6 +5,7 @@ import DiceLoader from "../components/DiceLoader";
 
 import { useMovieStore } from "../store/useMovieStore";
 import PickoneButton from "../components/PickoneButton";
+import MovieFromList from "../components/MovieFromList";
 
 const HomePage = () => {
   const { isLanGenLoading, isMoviesLoading, movies } = useMovieStore();
@@ -37,6 +38,9 @@ const HomePage = () => {
 
       {/* Movie Result */}
       <MovieList />
+
+      {/* 🎬 Picked Movie Modal */}
+      <MovieFromList />
     </div>
   );
 };

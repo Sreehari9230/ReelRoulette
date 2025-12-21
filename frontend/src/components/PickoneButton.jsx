@@ -1,34 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import { useMovieStore } from "../store/useMovieStore";
 
 const PickoneButton = () => {
-  const { movies } = useMovieStore();
+  const { movies, setPickedMovie } = useMovieStore();
+  const [rolling, setRolling] = useState(false);
 
   const handlePickOne = () => {
-    if (!movies || !movies.movies || movies.movies.length === 0) {
-      return;
-    }
+    if (!movies?.movies?.length) return;
 
-    const randomIndex = Math.floor(Math.random() * movies.movies.length);
+    setRolling(true);
 
-    const pickedMovie = movies.movies[randomIndex];
+    // 🎲 Dice roll delay
+    setTimeout(() => {
+      const randomIndex = Math.floor(Math.random() * movies.movies.length);
 
-    console.log("Picked movie:", pickedMovie);
+      const picked = movies.movies[randomIndex];
+      setPickedMovie(picked);
+      setRolling(false);
 
-    // for now simple feedback
-    alert(`🎬 I think you should watch: ${pickedMovie.title}`);
+      // ✨ Auto-scroll
+      setTimeout(() => {
+        document
+          .getElementById(`movie-${picked.id}`)
+          ?.scrollIntoView({ behavior: "smooth", block: "center" });
+
+        // 🎥 Open modal
+        document.getElementById("pick_one_modal").showModal();
+      }, 200);
+    }, 1200);
   };
 
   return (
     <button
       onClick={handlePickOne}
-      className="btn btn-primary flex items-center gap-2"
+      className="btn btn-primary"
+      disabled={rolling}
     >
-      🎲 Pick One
+      {rolling ? "🎲 Rolling..." : "🎬 Pick One"}
     </button>
   );
 };
 
 export default PickoneButton;
-
-// button called pick one which will randomly pick a movie from the list below
