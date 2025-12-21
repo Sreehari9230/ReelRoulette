@@ -45,4 +45,4 @@ Built by **Sreehari M**
 
 Star this repo if you find it useful! -->
 
-Not Be Updated
+Not Updated
