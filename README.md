@@ -1,32 +1,46 @@
-Movie Picker App
+# Movie Picker
 
-Discover movies and randomly pick one when you can’t decide.
-Uses a secure backend proxy to fetch data from TMDB without exposing the API key.
+A simple, elegant movie discovery app that helps you pick a random movie when you can't decide what to watch.
 
-Features:
-Filter by genre, language, year, rating
-Random movie selection
-Movie details in a modal
-Responsive poster grid
-Backend proxy for TMDB key safety
+## Features
 
-Tech Stack:
-Frontend: React, Zustand, Tailwind CSS, DaisyUI
-Backend: Node.js, Express, TMDB API (server-side proxy)
+- Filter by genre, language, year, and rating
+- Random movie selection
+- Responsive poster grid with hover effects
+- Secure backend proxy (API key protected)
+- Clean, minimal UI with DaisyUI
 
-Setup:
-Backend-
+## Tech Stack
+
+**Frontend:** React • Zustand • Tailwind CSS • DaisyUI  
+**Backend:** Node.js • Express • TMDB API
+
+## Setup
+
+### Backend
+```bash
+cd backend
 npm install
-
 npm run dev
+```
 
-.env:
+Create `.env` file:
+```
 TMDB_API_KEY=your_tmdb_api_key
+```
 
-Frontend
+### Frontend
+```bash
+cd frontend
 npm install
-
 npm run dev
+```
 
-Credits
-Movie data provided by TMDB. Built by Sreehari M.
+## Credits
+
+Movie data powered by [TMDB](https://www.themoviedb.org/)  
+Built by **Sreehari M**
+
+---
+
+Star this repo if you find it useful!
