@@ -89,7 +89,7 @@ const PickoneButton = () => {
         }
       `}
     >
-      {rolling ? "Rolling…" : "Pick one"}
+      {rolling ? "Rolling…" : "Pick a movie"}
     </button>
   );
 };

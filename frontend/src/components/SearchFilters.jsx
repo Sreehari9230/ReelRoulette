@@ -515,7 +515,7 @@ const SearchFilters = () => {
           hover:bg-neutral-900 hover:text-white
           disabled:opacity-50"
         >
-          Pick movie
+          Find Movies
         </button>
       </div>
     </div>
