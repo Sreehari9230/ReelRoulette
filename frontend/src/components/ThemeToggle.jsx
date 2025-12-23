@@ -32,7 +32,6 @@
 
 // export default ThemeToggle;
 
-
 import React from "react";
 import { Sun, Moon } from "lucide-react";
 import { useThemeStore } from "../store/useThemeStore";
@@ -55,16 +54,12 @@ const ThemeToggle = () => {
     >
       <Sun
         size={14}
-        className={`${
-          theme === "light" ? "opacity-100" : "opacity-40"
-        }`}
+        className={`${theme === "light" ? "opacity-100" : "opacity-40"}`}
       />
       <div className="w-1px h-4 bg-neutral-400" />
       <Moon
         size={14}
-        className={`${
-          theme === "dark" ? "opacity-100" : "opacity-40"
-        }`}
+        className={`${theme === "dark" ? "opacity-100" : "opacity-40"}`}
       />
     </button>
   );

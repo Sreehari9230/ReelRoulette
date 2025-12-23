@@ -430,9 +430,7 @@ const SearchFilters = () => {
           <p className="text-xs uppercase tracking-widest opacity-70 mb-1">
             Minimum rating
           </p>
-          <p className="text-sm mb-2 tabular-nums">
-            {filters.rating}+
-          </p>
+          <p className="text-sm mb-2 tabular-nums">{filters.rating}+</p>
 
           <input
             type="range"
@@ -525,4 +523,3 @@ const SearchFilters = () => {
 };
 
 export default SearchFilters;
-

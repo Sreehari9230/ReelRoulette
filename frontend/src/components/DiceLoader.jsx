@@ -28,7 +28,6 @@
 //     },
 //   };
 
-
 const DiceLoader = () => {
   return (
     <div className="fixed inset-0 z-50 bg-base-100 flex items-center justify-center">
@@ -41,4 +40,3 @@ const DiceLoader = () => {
 };
 
 export default DiceLoader;
-
