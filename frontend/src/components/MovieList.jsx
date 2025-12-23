@@ -91,7 +91,7 @@ const MovieList = () => {
   if (!movies || !movies.movies || movies.movies.length === 0) {
     return (
       <div className="w-full max-w-4xl mx-auto py-24 text-center">
-        <p className="text-sm-/50 tracking-wide">
+        <p className="text-sm tracking-wide">
           Your random film will appear here
         </p>
       </div>

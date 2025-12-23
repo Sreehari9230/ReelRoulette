@@ -339,9 +339,15 @@ const SearchFilters = () => {
     <div className="w-full max-w-sm border border-neutral-500 bg-base-100">
       <div className="p-4 space-y-5">
         {/* Header */}
-        <h2 className="text-sm font-semibold tracking-widest uppercase">
+        {/* <h2 className="text-sm font-semibold tracking-widest uppercase">
           Random Movie Picker
+        </h2> */}
+        <h2 className="text-sm font-semibold tracking-widest uppercase">
+          Movie Discovery
         </h2>
+        <p className="text-xs opacity-60">
+          Discover movies based on your preferences
+        </p>
 
         {/* ================= GENRES ================= */}
         <section>
