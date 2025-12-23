@@ -1,5 +1,8 @@
 import axios from 'axios'
 
 export const axiosInstance = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: "https://spotlight-x010.onrender.com",
 });
+
+
+// http://localhost:5000
