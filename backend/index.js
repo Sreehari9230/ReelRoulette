@@ -12,10 +12,13 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://monumental-entremet-ccba5d.netlify.app/",
     credentials: true,
   })
 );
+
+// https://monumental-entremet-ccba5d.netlify.app/
+// http://localhost:5173
 
 app.use(express.json());
 
