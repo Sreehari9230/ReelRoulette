@@ -12,12 +12,12 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://monumental-entremet-ccba5d.netlify.app/",
+    origin: "https://spot-light-12-2025.netlify.app/",
     credentials: true,
   })
 );
 
-// https://monumental-entremet-ccba5d.netlify.app/
+// https://spot-light-12-2025.netlify.app/
 // http://localhost:5173
 
 app.use(express.json());
