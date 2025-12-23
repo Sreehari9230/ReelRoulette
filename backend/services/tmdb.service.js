@@ -16,10 +16,10 @@ const params = {
 
   // Rating quality
   "vote_average.gte": rating || 6,
-  "vote_count.gte": 50,
+  "vote_count.gte": 10,
 
   // Avoid very obscure movies
-  "popularity.gte": 5,
+  "popularity.gte": 2,
 
   // Release year range
   "primary_release_date.gte": yearFrom
