@@ -1,3 +1,38 @@
+// import React from "react";
+// import { Sun, Moon } from "lucide-react";
+// import { useThemeStore } from "../store/useThemeStore";
+
+// const ThemeToggle = () => {
+//   const { theme, setTheme } = useThemeStore();
+
+//   const themeToggled = () => {
+//     // Toggle between light and dark
+//     const newTheme = theme === "dark" ? "light" : "dark";
+//     setTheme(newTheme);
+//   };
+
+//   return (
+//     <div>
+//       <label className="toggle text-base-content">
+//         <input
+//           type="checkbox"
+//           value="synthwave"
+//           className="theme-controller"
+//           onChange={themeToggled} // ✅ changed from onClick
+//           checked={theme === "dark"} // ✅ controlled input
+//         />
+
+//         {/* Icons */}
+//         <Sun aria-label="sun" size={16} />
+//         <Moon aria-label="moon" size={16} />
+//       </label>
+//     </div>
+//   );
+// };
+
+// export default ThemeToggle;
+
+
 import React from "react";
 import { Sun, Moon } from "lucide-react";
 import { useThemeStore } from "../store/useThemeStore";
@@ -5,28 +40,33 @@ import { useThemeStore } from "../store/useThemeStore";
 const ThemeToggle = () => {
   const { theme, setTheme } = useThemeStore();
 
-  const themeToggled = () => {
-    // Toggle between light and dark
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   return (
-    <div>
-      <label className="toggle text-base-content">
-        <input
-          type="checkbox"
-          value="synthwave"
-          className="theme-controller"
-          onChange={themeToggled} // ✅ changed from onClick
-          checked={theme === "dark"} // ✅ controlled input
-        />
-
-        {/* Icons */}
-        <Sun aria-label="sun" size={16} />
-        <Moon aria-label="moon" size={16} />
-      </label>
-    </div>
+    <button
+      onClick={toggleTheme}
+      aria-label="Toggle theme"
+      className="flex items-center gap-2
+      border border-neutral-500 px-2 py-1
+      text-sm transition-transform
+      hover:-translate-y-1px"
+    >
+      <Sun
+        size={14}
+        className={`${
+          theme === "light" ? "opacity-100" : "opacity-40"
+        }`}
+      />
+      <div className="w-1px h-4 bg-neutral-400" />
+      <Moon
+        size={14}
+        className={`${
+          theme === "dark" ? "opacity-100" : "opacity-40"
+        }`}
+      />
+    </button>
   );
 };
 

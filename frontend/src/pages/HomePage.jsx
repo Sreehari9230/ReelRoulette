@@ -27,7 +27,7 @@ const HomePage = () => {
       {(isLanGenLoading || isMoviesLoading) && (
         // || isLoading
         <DiceLoader />
-      )}
+      )} 
 
       {/* Filters */}
       <SearchFilters />
