@@ -12,7 +12,11 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://spot-light-12-2025.netlify.app/",
+    origin: [
+      "http://localhost:5173",
+      "https://spot-light-12-2025.netlify.app"
+    ],
+    methods: ["GET", "POST"],
     credentials: true,
   })
 );
