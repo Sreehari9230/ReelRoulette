@@ -107,7 +107,7 @@
 // export default Navbar;
 
 import React, { useEffect, useState } from "react";
-import { Clapperboard } from "lucide-react";
+import { Clapperboard, Sparkles } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
 const Navbar = () => {
@@ -139,7 +139,16 @@ const Navbar = () => {
     >
       <div className="relative mx-auto max-w-7xl px-4 py-2 flex items-center h-12">
         {/* Left spacer */}
-        <div className="w-8" />
+        {/* <div className="w-8" /> */}
+
+        {/* upcoming feture button and its modal */}
+        <button
+          onClick={() => document.getElementById("future_features").showModal()}
+          className="btn btn-ghost btn-sm gap-2 opacity-70 hover:opacity-100 transition"
+        >
+          <Sparkles size={14} />
+          <span className="hidden sm:inline">Upcoming</span>
+        </button>
 
         {/* Center branding */}
         <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2">
@@ -148,6 +157,50 @@ const Navbar = () => {
             Spotlight
           </span>
         </div>
+
+        <dialog id="future_features" className="modal">
+          <div className="modal-box p-0 overflow-hidden relative max-w-md rounded-none border border-neutral-600 max-h-[80vh]">
+            <div className="flex flex-col max-h-[80vh]">
+              {/* 🧭 Header */}
+              <div className="border-b border-neutral-500 p-4 bg-base-100">
+                <h3 className="text-sm font-semibold uppercase tracking-wide">
+                  Upcoming Features
+                </h3>
+              </div>
+
+              {/* 📄 Content */}
+              <div className="p-6 space-y-3 overflow-y-auto flex-1">
+                <ul className="space-y-2 text-sm text-base-content/80">
+                  <li className="flex gap-2">
+                    <span>•</span>
+                    <span>Dedicated movie search page</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span>•</span>
+                    <span>Google login</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span>•</span>
+                    <span>Personal watchlist</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <span>•</span>
+                    <span>Pick one movie from your watchlist</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* ❌ Sticky close */}
+              <div className="sticky bottom-0 bg-base-100 border-t border-neutral-500 p-4">
+                <form method="dialog" className="flex justify-end">
+                  <button className="px-4 py-2 text-sm border border-neutral-500 hover:bg-base-200 transition">
+                    Close
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </dialog>
 
         {/* Right controls */}
         <div className="ml-auto flex items-center gap-2">
